@@ -6,14 +6,34 @@ const skills = [
 
 module.exports = {
   getAll,
-  getOne
+  getOne,
+  create,
+  deleteOne,
+  update
 };
 
-function getOne(id) {
-  // URL params are strings - convert to a number
+function update(id, updatedSkill) {
   id = parseInt(id);
-  // The Array.prototype.find iterator method is
-  // ideal for finding objects within an array
+  const skill = skills.find(skill => skill.id === id);
+  Object.assign(skill, updatedSkill);
+}
+
+function deleteOne(id) {
+  id = parseInt(id);
+  // Find the index for the skill
+  const idx = skills.findIndex(skill => skill.id === id);
+  skills.splice(idx, 1);
+}
+
+function create(skill) {
+  // Add the id
+  skill.id = Date.now() % 1000000;
+  skill.done = false;
+  skills.push(skill);
+}
+
+function getOne(id) {
+  id = parseInt(id);
   return skills.find(skill => skill.id === id);
 }
 

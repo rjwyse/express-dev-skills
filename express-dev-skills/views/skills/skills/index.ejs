@@ -3,22 +3,22 @@
 <h3>To-Dos as of <%= time %></h3>
 
 <ul>
-  <% todos.forEach(function(t) { %>
+  <% skills.forEach(function(t) { %>
     <li>
       <form
-        action="/todos/<%= t.id %>?_method=DELETE"
+        action="/skills/<%= t.id %>?_method=DELETE"
         method="POST"
         class="delete-form"
       >
         <button type="submit">X</button>
       </form>
-      <a href="/todos/<%= t.id %>"><%= t.todo %></a>
+      <a href="/skills/<%= t.id %>"><%= t.skill %></a>
       - 
       <%= t.done ? 'done' : 'not done' %>
     </li>
   <% }); %>
 </ul>
-<a href="/todos/new">Add To-Do</a>
+<a href="/skills/new">Add To-Do</a>
 
   
 <%- include('../partials/footer') %>
