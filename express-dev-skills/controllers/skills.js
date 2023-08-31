@@ -24,7 +24,7 @@ function edit(req, res) {
   });
 }
 
-function deleteskill(req, res) {
+function deleteSkill(req, res) {
   skill.deleteOne(req.params.id);
   res.redirect('/skills');
 }
@@ -37,14 +37,14 @@ function create(req, res) {
   res.redirect('/skills');
 }
 
-function newskill(req, res) {
+function newSkill(req, res) {
   res.render('skills/new', { title: 'New skill' });
 }
 
 function show(req, res) {
   res.render('skills/show', {
     skill: skill.getOne(req.params.id),
-    title: 'To-Do Details'
+    title: 'Skills Details'
   });
 }
 

@@ -3,7 +3,7 @@ var router = express.Router();
 var skillsCtrl = require('../controllers/skills');
 
 
-//All actual paths start with "/skillls"
+//All actual paths start with "/skills"
 
 //GET /SKILLS
 router.get('/', skillsCtrl.index);
