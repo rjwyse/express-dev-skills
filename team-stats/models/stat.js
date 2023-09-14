@@ -7,4 +7,8 @@ const statSchema = new Schema({
   position: String,
   goals: String,
   assist: [String]
+}, {
+  timestamps: true
 });
+
+module.exports = mongoose.model('Stat', statSchema);
