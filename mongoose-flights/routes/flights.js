@@ -1,56 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const Flight = require('../models/flight');
+const flightsCtrl = require('../controllers/flights');
 
-// GET form to add a new flight
-router.get('/new', (req, res) => {
-  res.render('flights/new');
-});
+// GET /flights
+router.get('/', flightsCtrl.index);
+// GET /flights/new
+router.get('/new', flightsCtrl.new);
+// GET /flights/:id (show functionality) MUST be below new route
+router.get('/:id', flightsCtrl.show);
+// POST /flights
+router.post('/', flightsCtrl.create);
 
-router.get('/', async (req, res) => {
-    try {
-      const flights = await Flight.find({});
-      res.render('flights/index', { flights });
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
-    }
-  });
-
-// POST new flight data
-router.post('/', async (req, res) => {
-  try {
-    const flight = new Flight(req.body);
-    await flight.save();
-    res.redirect('/flights');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-// GET flight details (show view) for a specific flight
-router.get('/:id', async (req, res) => {
-  try {
-    const flight = await Flight.findById(req.params.id);
-    res.render('flights/show', { flight });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-// POST new destination for a specific flight
-router.post('/:id/destinations', async (req, res) => {
-  try {
-    const flight = await Flight.findById(req.params.id);
-    flight.destinations.push(req.body);
-    await flight.save();
-    res.redirect(`/flights/${flight._id}`);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
+	
 module.exports = router;

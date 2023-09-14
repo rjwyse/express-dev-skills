@@ -1,4 +1,4 @@
-const flight = require('../models/flight');
+const Flight = require('../models/flight');
 
 module.exports = {
   index,
@@ -8,17 +8,17 @@ module.exports = {
   
 };
 
-async function index(req, res) {
-  const flights = await flight.find({});
+async function index(req, res, next) {
+  const flights = await Flight.find({});
   res.render('flights/index', { title: 'All flights', flights });
 }
 
 async function show(req, res) {
-  const flight = await flight.findById(req.params.id);
+  const flight = await Flight.findById(req.params.id);
   res.render('flights/show', { title: 'flight Detail', flight });
 }
 
-function newflight(req, res) {
+function newflight(req, res, next) {
   res.render('flights/new', { title: 'Add flight', errorMsg: '' });
 }
 
